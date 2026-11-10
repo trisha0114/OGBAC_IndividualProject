@@ -1,7 +1,9 @@
+
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\CustomerController;
+use App\Http\Controllers\Api\V1\StaffController;
 use Illuminate\Support\Facades\Route;
 
 // Public authentication routes
@@ -18,3 +20,7 @@ Route::middleware('auth:api')->group(function () {
 // Customer routes
 Route::get('/customers', [CustomerController::class, 'index']);
 Route::get('/customers/{customer}', [CustomerController::class, 'show']);
+
+// Staff routes
+Route::get('/staff', [StaffController::class, 'index']);
+Route::get('/staff/{user}', [StaffController::class, 'show']);
