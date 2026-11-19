@@ -4,22 +4,24 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Resources\V1\CustomerResource;
 use App\Models\Customer;
+use App\Http\Filters\V1\CustomerFilter;
 
 class CustomerController extends APIController
 {
     /**
      * GET /api/v1/customers
+     * Supports filtering and optional user relationship.
      */
-    public function index()
+    public function index(CustomerFilter $filters)
     {
+        $customers = Customer::filter($filters);
+
         if ($this->include('user')) {
-            return CustomerResource::collection(
-                Customer::with('user')->paginate(15)
-            );
+            $customers->with('user');
         }
 
         return CustomerResource::collection(
-            Customer::paginate(15)
+            $customers->paginate(15)
         );
     }
 
@@ -29,9 +31,7 @@ class CustomerController extends APIController
     public function show(Customer $customer)
     {
         if ($this->include('user')) {
-            return new CustomerResource(
-                $customer->load('user')
-            );
+            $customer->load('user');
         }
 
         return new CustomerResource($customer);
