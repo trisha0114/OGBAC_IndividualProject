@@ -4,7 +4,6 @@ namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\V1\CustomerResource;
 
 class UserResource extends JsonResource
 {
@@ -19,11 +18,11 @@ class UserResource extends JsonResource
                 'email' => $this->email,
             ],
 
-            'relationships' => [
-                'customers' => CustomerResource::collection(
-                    $this->whenLoaded('customers')
-                ),
-            ],
+            // Customers appear only when requested
+            'includes' => $this->whenLoaded(
+                'customers',
+                fn () => CustomerResource::collection($this->customers)
+            ),
         ];
     }
 }

@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\CustomerResource;
 use App\Models\Customer;
 
-class CustomerController extends Controller
+class CustomerController extends APIController
 {
     /**
      * GET /api/v1/customers
-     * Returns a paginated list of customers.
      */
     public function index()
     {
+        if ($this->include('user')) {
+            return CustomerResource::collection(
+                Customer::with('user')->paginate(15)
+            );
+        }
+
         return CustomerResource::collection(
             Customer::paginate(15)
         );
@@ -21,10 +25,15 @@ class CustomerController extends Controller
 
     /**
      * GET /api/v1/customers/{customer}
-     * Returns one customer.
      */
     public function show(Customer $customer)
     {
+        if ($this->include('user')) {
+            return new CustomerResource(
+                $customer->load('user')
+            );
+        }
+
         return new CustomerResource($customer);
     }
 }

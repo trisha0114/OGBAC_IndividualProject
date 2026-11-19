@@ -21,6 +21,11 @@ class CustomerResource extends JsonResource
                 'createdAt' => $this->created_at,
                 'updatedAt' => $this->updated_at,
             ],
+
+            // User information appears only when requested
+            'includes' => new UserResource(
+                $this->whenLoaded('user')
+            ),
         ];
     }
 }
