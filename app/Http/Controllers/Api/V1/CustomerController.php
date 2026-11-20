@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Resources\V1\CustomerResource;
+use App\Http\Requests\Api\V1\StoreCustomerRequest;
 use App\Models\Customer;
 use App\Http\Filters\V1\CustomerFilter;
 
 class CustomerController extends APIController
 {
-    /**
-     * GET /api/v1/customers
-     * Supports filtering and optional user relationship.
-     */
     public function index(CustomerFilter $filters)
     {
         $customers = Customer::filter($filters);
@@ -25,9 +22,15 @@ class CustomerController extends APIController
         );
     }
 
-    /**
-     * GET /api/v1/customers/{customer}
-     */
+    public function store(StoreCustomerRequest $request)
+    {
+        $customer = Customer::create(
+            $request->mappedAttributes()
+        );
+
+        return new CustomerResource($customer);
+    }
+
     public function show(Customer $customer)
     {
         if ($this->include('user')) {

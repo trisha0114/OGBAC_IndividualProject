@@ -12,7 +12,6 @@ class CustomerResource extends JsonResource
         return [
             'type' => 'customer',
             'id' => (string) $this->id,
-
             'attributes' => [
                 'name' => $this->name,
                 'age' => $this->age,
@@ -21,11 +20,9 @@ class CustomerResource extends JsonResource
                 'createdAt' => $this->created_at,
                 'updatedAt' => $this->updated_at,
             ],
-
-            // User information appears only when requested
-            'includes' => new UserResource(
-                $this->whenLoaded('user')
-            ),
+            'includes' => [
+                'user' => new UserResource($this->whenLoaded('user')),
+            ],
         ];
     }
 }

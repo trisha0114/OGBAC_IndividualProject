@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
@@ -23,6 +22,7 @@ Route::apiResource('users.customers', UserCustomersController::class)
 
 // Customer routes
 Route::get('/customers', [CustomerController::class, 'index']);
+Route::post('/customers', [CustomerController::class, 'store']);
 Route::get('/customers/{customer}', [CustomerController::class, 'show']);
 
 // Staff routes
