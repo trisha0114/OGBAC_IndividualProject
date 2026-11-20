@@ -4,6 +4,15 @@ namespace App\Http\Filters\V1;
 
 class CustomerFilter extends QueryFilter
 {
+    // The columns clients may sort customers by.
+    protected array $sortable = [
+        'name',
+        'age',
+        'contactNumber' => 'contact_number',
+        'createdAt' => 'created_at',
+        'updatedAt' => 'updated_at',
+    ];
+
     /**
      * ?createdAt=2026-11-19
      * ?createdAt=2026-11-01,2026-11-30
@@ -54,7 +63,6 @@ class CustomerFilter extends QueryFilter
 
     /**
      * ?name=*John*
-     * The * wildcard becomes SQL % for LIKE search.
      */
     public function name($value)
     {

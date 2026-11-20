@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Filters\V1\UserFilter;
 use App\Http\Resources\V1\UserResource;
 use App\Models\User;
 
@@ -9,17 +10,18 @@ class StaffController extends APIController
 {
     /**
      * GET /api/v1/staff
+     * Supports sorting and optional customer relationships.
      */
-    public function index()
+    public function index(UserFilter $filters)
     {
+        $users = User::filter($filters);
+
         if ($this->include('customers')) {
-            return UserResource::collection(
-                User::with('customers')->paginate(15)
-            );
+            $users->with('customers');
         }
 
         return UserResource::collection(
-            User::paginate(15)
+            $users->paginate(15)
         );
     }
 
@@ -29,9 +31,7 @@ class StaffController extends APIController
     public function show(User $user)
     {
         if ($this->include('customers')) {
-            return new UserResource(
-                $user->load('customers')
-            );
+            $user->load('customers');
         }
 
         return new UserResource($user);

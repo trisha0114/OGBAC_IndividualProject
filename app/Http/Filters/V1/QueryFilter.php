@@ -15,6 +15,9 @@ abstract class QueryFilter
 
     protected Request $request;
 
+    // Columns that child filter classes may sort by.
+    protected array $sortable = [];
+
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -35,5 +38,38 @@ abstract class QueryFilter
         }
 
         return $this->builder;
+    }
+
+    /**
+     * ?sort=name
+     * ?sort=-createdAt
+     * ?sort=name,age
+     */
+    protected function sort($value): void
+    {
+        $sortAttributes = explode(',', $value);
+
+        foreach ($sortAttributes as $sortAttribute) {
+            $direction = 'asc';
+
+            // A leading minus means descending order.
+            if (str_starts_with($sortAttribute, '-')) {
+                $direction = 'desc';
+                $sortAttribute = substr($sortAttribute, 1);
+            }
+
+            // Ignore columns that are not in the whitelist.
+            if (
+                !in_array($sortAttribute, $this->sortable, true) &&
+                !array_key_exists($sortAttribute, $this->sortable)
+            ) {
+                continue;
+            }
+
+            // Translate public names to actual database columns.
+            $columnName = $this->sortable[$sortAttribute] ?? $sortAttribute;
+
+            $this->builder->orderBy($columnName, $direction);
+        }
     }
 }
