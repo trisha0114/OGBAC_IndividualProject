@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Resources\V1\CustomerResource;
 use App\Http\Requests\Api\V1\StoreCustomerRequest;
+use App\Http\Requests\Api\V1\ReplaceCustomerRequest;
 use App\Models\Customer;
 use App\Http\Filters\V1\CustomerFilter;
 
@@ -48,5 +49,20 @@ class CustomerController extends APIController
         $customer->delete();
 
         return $this->ok('Customer successfully deleted');
+    }
+
+    /**
+     * PUT /api/v1/customers/{customer}
+     * Replaces the entire customer resource.
+     */
+    public function replace(
+        ReplaceCustomerRequest $request,
+        Customer $customer
+    ) {
+        $customer->update(
+            $request->mappedAttributes()
+        );
+
+        return new CustomerResource($customer);
     }
 }

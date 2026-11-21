@@ -19,6 +19,9 @@ Route::middleware('auth:api')->group(function () {
     // Delete customer
     Route::delete('/customers/{customer}', [CustomerController::class, 'destroy']);
 
+    // Replace customer using PUT
+    Route::put('/customers/{customer}', [CustomerController::class, 'replace']);
+
     // Customers belonging to one user
     Route::apiResource('users.customers', UserCustomersController::class)
         ->only(['index']);
