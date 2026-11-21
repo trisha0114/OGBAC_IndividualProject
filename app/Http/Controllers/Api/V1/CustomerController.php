@@ -32,6 +32,12 @@ class CustomerController extends APIController
      */
     public function store(StoreCustomerRequest $request)
     {
+        if (!$this->isAble('create', Customer::class)) {
+            return $this->notAuthorized(
+                'You are not authorized to create customers.'
+            );
+        }
+
         $customer = Customer::create(
             $request->mappedAttributes()
         );
@@ -56,6 +62,12 @@ class CustomerController extends APIController
      */
     public function destroy(Customer $customer)
     {
+        if (!$this->isAble('delete', $customer)) {
+            return $this->notAuthorized(
+                'You are not authorized to delete this customer.'
+            );
+        }
+
         $customer->delete();
 
         return $this->ok('Customer successfully deleted');
@@ -68,6 +80,12 @@ class CustomerController extends APIController
         ReplaceCustomerRequest $request,
         Customer $customer
     ) {
+        if (!$this->isAble('update', $customer)) {
+            return $this->notAuthorized(
+                'You are not authorized to replace this customer.'
+            );
+        }
+
         $customer->update(
             $request->mappedAttributes()
         );
@@ -77,7 +95,6 @@ class CustomerController extends APIController
 
     /**
      * PATCH /api/v1/customers/{customer}
-     * Update only the fields included in the request.
      */
     public function update(
         UpdateCustomerRequest $request,
