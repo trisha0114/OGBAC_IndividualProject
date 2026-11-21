@@ -10,27 +10,32 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-// Protected authentication routes
+// Protected routes
 Route::middleware('auth:api')->group(function () {
+
+    // Authentication
     Route::get('/user', [AuthController::class, 'me']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    // Delete customer
+    // Customer routes
     Route::delete('/customers/{customer}', [CustomerController::class, 'destroy']);
+    Route::put('/customers/{customer}', [CustomerController::class, 'replace']);
+    Route::patch('/customers/{customer}', [CustomerController::class, 'update']);
+
+    // Nested user customers routes
+    Route::apiResource('users.customers', UserCustomersController::class)
+        ->only(['index', 'store', 'update', 'destroy'])
+        ->scoped();
 
     // Replace customer using PUT
-    Route::put('/customers/{customer}', [CustomerController::class, 'replace']);
-
-    // Update customer using PATCH (partial update)
-Route::patch('/customers/{customer}', [CustomerController::class, 'update']);
-
-    // Customers belonging to one user
-    Route::apiResource('users.customers', UserCustomersController::class)
-        ->only(['index']);
+    Route::put(
+        '/users/{user}/customers/{customer}',
+        [UserCustomersController::class, 'replace']
+    )->scopeBindings();
 });
 
-// Customer routes
+// Public customer routes
 Route::get('/customers', [CustomerController::class, 'index']);
 Route::post('/customers', [CustomerController::class, 'store']);
 Route::get('/customers/{customer}', [CustomerController::class, 'show']);

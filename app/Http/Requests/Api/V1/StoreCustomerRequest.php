@@ -2,25 +2,15 @@
 
 namespace App\Http\Requests\Api\V1;
 
-use App\Permissions\V1\Abilities;
-
 class StoreCustomerRequest extends BaseCustomerRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Validation rules for creating a customer.
-     */
     public function rules(): array
     {
-        $userIdAttr = 'data.relationships.user.data.id';
-
         $rules = [
             'data.attributes.name' => [
                 'required',
@@ -44,23 +34,15 @@ class StoreCustomerRequest extends BaseCustomerRequest
                 'required',
                 'string',
             ],
-
-            $userIdAttr => [
-                'sometimes',
-                'integer',
-                'exists:users,id',
-            ],
         ];
 
-        // Regular users can only create customers under their own user ID.
-        $user = $this->user();
-
-        if ($user && $user->tokenCan(Abilities::CreateOwnCustomer)) {
-            $rules[$userIdAttr] = [
+        // Standalone customer creation requires a user ID.
+        // Nested creation gets the user ID from the URL.
+        if (!$this->route('user')) {
+            $rules['data.relationships.user.data.id'] = [
                 'required',
                 'integer',
                 'exists:users,id',
-                'size:' . $user->id,
             ];
         }
 
