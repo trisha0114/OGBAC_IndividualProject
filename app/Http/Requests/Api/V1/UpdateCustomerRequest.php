@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\V1;
 
-use Illuminate\Validation\Rule;
+use App\Permissions\V1\Abilities;
 
 class UpdateCustomerRequest extends BaseCustomerRequest
 {
@@ -13,7 +13,7 @@ class UpdateCustomerRequest extends BaseCustomerRequest
 
     public function rules(): array
     {
-        return [
+        $rules = [
             'data' => ['sometimes', 'array'],
             'data.attributes' => ['sometimes', 'array'],
 
@@ -50,5 +50,14 @@ class UpdateCustomerRequest extends BaseCustomerRequest
                 'exists:users,id',
             ],
         ];
+
+        // Regular users cannot change the customer owner.
+        if ($this->user()->tokenCan(Abilities::UpdateOwnCustomer)) {
+            $rules['data.relationships.user.data.id'] = [
+                'prohibited',
+            ];
+        }
+
+        return $rules;
     }
 }

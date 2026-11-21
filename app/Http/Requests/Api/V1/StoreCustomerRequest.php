@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Api\V1;
 
+use App\Permissions\V1\Abilities;
+
 class StoreCustomerRequest extends BaseCustomerRequest
 {
     /**
@@ -17,7 +19,9 @@ class StoreCustomerRequest extends BaseCustomerRequest
      */
     public function rules(): array
     {
-        return [
+        $userIdAttr = 'data.relationships.user.data.id';
+
+        $rules = [
             'data.attributes.name' => [
                 'required',
                 'string',
@@ -41,10 +45,25 @@ class StoreCustomerRequest extends BaseCustomerRequest
                 'string',
             ],
 
-            'data.relationships.user.data.id' => [
+            $userIdAttr => [
                 'sometimes',
+                'integer',
                 'exists:users,id',
             ],
         ];
+
+        // Regular users can only create customers under their own user ID.
+        $user = $this->user();
+
+        if ($user && $user->tokenCan(Abilities::CreateOwnCustomer)) {
+            $rules[$userIdAttr] = [
+                'required',
+                'integer',
+                'exists:users,id',
+                'size:' . $user->id,
+            ];
+        }
+
+        return $rules;
     }
 }
