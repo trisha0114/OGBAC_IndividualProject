@@ -13,7 +13,6 @@ class CustomerController extends APIController
 {
     /**
      * GET /api/v1/customers
-     * Retrieve all customers with filtering and pagination.
      */
     public function index(CustomerFilter $filters)
     {
@@ -30,7 +29,6 @@ class CustomerController extends APIController
 
     /**
      * POST /api/v1/customers
-     * Create a new customer.
      */
     public function store(StoreCustomerRequest $request)
     {
@@ -43,7 +41,6 @@ class CustomerController extends APIController
 
     /**
      * GET /api/v1/customers/{customer}
-     * Retrieve a specific customer.
      */
     public function show(Customer $customer)
     {
@@ -56,7 +53,6 @@ class CustomerController extends APIController
 
     /**
      * DELETE /api/v1/customers/{customer}
-     * Delete a customer.
      */
     public function destroy(Customer $customer)
     {
@@ -67,7 +63,6 @@ class CustomerController extends APIController
 
     /**
      * PUT /api/v1/customers/{customer}
-     * Replace the entire customer resource.
      */
     public function replace(
         ReplaceCustomerRequest $request,
@@ -88,6 +83,12 @@ class CustomerController extends APIController
         UpdateCustomerRequest $request,
         Customer $customer
     ) {
+        if (!$this->isAble('update', $customer)) {
+            return $this->notAuthorized(
+                'You are not authorized to update this customer.'
+            );
+        }
+
         $customer->update(
             $request->mappedAttributes()
         );
