@@ -22,6 +22,9 @@ Route::middleware('auth:api')->group(function () {
     // Replace customer using PUT
     Route::put('/customers/{customer}', [CustomerController::class, 'replace']);
 
+    // Update customer using PATCH (partial update)
+Route::patch('/customers/{customer}', [CustomerController::class, 'update']);
+
     // Customers belonging to one user
     Route::apiResource('users.customers', UserCustomersController::class)
         ->only(['index']);

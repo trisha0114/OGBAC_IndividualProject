@@ -5,11 +5,16 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Resources\V1\CustomerResource;
 use App\Http\Requests\Api\V1\StoreCustomerRequest;
 use App\Http\Requests\Api\V1\ReplaceCustomerRequest;
+use App\Http\Requests\Api\V1\UpdateCustomerRequest;
 use App\Models\Customer;
 use App\Http\Filters\V1\CustomerFilter;
 
 class CustomerController extends APIController
 {
+    /**
+     * GET /api/v1/customers
+     * Retrieve all customers with filtering and pagination.
+     */
     public function index(CustomerFilter $filters)
     {
         $customers = Customer::filter($filters);
@@ -23,6 +28,10 @@ class CustomerController extends APIController
         );
     }
 
+    /**
+     * POST /api/v1/customers
+     * Create a new customer.
+     */
     public function store(StoreCustomerRequest $request)
     {
         $customer = Customer::create(
@@ -32,6 +41,10 @@ class CustomerController extends APIController
         return new CustomerResource($customer);
     }
 
+    /**
+     * GET /api/v1/customers/{customer}
+     * Retrieve a specific customer.
+     */
     public function show(Customer $customer)
     {
         if ($this->include('user')) {
@@ -43,6 +56,7 @@ class CustomerController extends APIController
 
     /**
      * DELETE /api/v1/customers/{customer}
+     * Delete a customer.
      */
     public function destroy(Customer $customer)
     {
@@ -53,10 +67,25 @@ class CustomerController extends APIController
 
     /**
      * PUT /api/v1/customers/{customer}
-     * Replaces the entire customer resource.
+     * Replace the entire customer resource.
      */
     public function replace(
         ReplaceCustomerRequest $request,
+        Customer $customer
+    ) {
+        $customer->update(
+            $request->mappedAttributes()
+        );
+
+        return new CustomerResource($customer);
+    }
+
+    /**
+     * PATCH /api/v1/customers/{customer}
+     * Update only the fields included in the request.
+     */
+    public function update(
+        UpdateCustomerRequest $request,
         Customer $customer
     ) {
         $customer->update(
