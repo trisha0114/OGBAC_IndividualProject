@@ -3,8 +3,8 @@
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\CustomerController;
 use App\Http\Controllers\Api\V1\StaffController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\UserCustomersController;
+use Illuminate\Support\Facades\Route;
 
 // Public authentication routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -15,9 +15,13 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/user', [AuthController::class, 'me']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Delete customer
+    Route::delete('/customers/{customer}', [CustomerController::class, 'destroy']);
+
     // Customers belonging to one user
-Route::apiResource('users.customers', UserCustomersController::class)
-    ->only(['index']);
+    Route::apiResource('users.customers', UserCustomersController::class)
+        ->only(['index']);
 });
 
 // Customer routes

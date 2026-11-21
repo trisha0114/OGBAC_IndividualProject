@@ -39,4 +39,14 @@ class CustomerController extends APIController
 
         return new CustomerResource($customer);
     }
+
+    /**
+     * DELETE /api/v1/customers/{customer}
+     */
+    public function destroy(Customer $customer)
+    {
+        $customer->delete();
+
+        return $this->ok('Customer successfully deleted');
+    }
 }
