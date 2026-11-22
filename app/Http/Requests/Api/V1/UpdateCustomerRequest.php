@@ -11,6 +11,38 @@ class UpdateCustomerRequest extends BaseCustomerRequest
         return true;
     }
 
+    /**
+     * Describe the request body parameters for Scribe.
+     */
+    public function bodyParameters(): array
+    {
+        return [
+            'data' => [
+                'description' => 'The JSON:API customer resource object.',
+            ],
+            'data.attributes.name' => [
+                'description' => 'The updated full name of the customer.',
+                'example' => 'Juan Dela Cruz',
+            ],
+            'data.attributes.age' => [
+                'description' => 'The updated age of the customer.',
+                'example' => 25,
+            ],
+            'data.attributes.contactNumber' => [
+                'description' => 'The updated contact number of the customer.',
+                'example' => '09171234567',
+            ],
+            'data.attributes.address' => [
+                'description' => 'The updated residential address of the customer.',
+                'example' => 'Puerto Princesa City, Palawan',
+            ],
+            'data.relationships.user.data.id' => [
+                'description' => 'The ID of the user associated with this customer. Only users with the appropriate permission can change ownership.',
+                'example' => 1,
+            ],
+        ];
+    }
+
     public function rules(): array
     {
         $rules = [
@@ -50,8 +82,10 @@ class UpdateCustomerRequest extends BaseCustomerRequest
             ],
         ];
 
-        // Only users with broad permission may change the owner.
-        if ($this->user()->tokenCan(Abilities::UpdateCustomer)) {
+        // Only authenticated users with broad permission may change the owner.
+        $user = $this->user();
+
+        if ($user && $user->tokenCan(Abilities::UpdateCustomer)) {
             $rules['data.relationships.user.data.id'] = [
                 'sometimes',
                 'integer',

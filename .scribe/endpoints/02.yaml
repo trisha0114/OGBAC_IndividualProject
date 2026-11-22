@@ -1,0 +1,615 @@
+name: 'PoolDesk API Endpoints'
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/customers/{customer_id}'
+    metadata:
+      custom: []
+      groupName: 'PoolDesk API Endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'DELETE /api/v1/customers/{customer}'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      customer_id:
+        custom: []
+        name: customer_id
+        description: 'The ID of the customer.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      customer_id: 2
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/customers/{customer_id}'
+    metadata:
+      custom: []
+      groupName: 'PoolDesk API Endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'PUT /api/v1/customers/{customer}'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      customer_id:
+        custom: []
+        name: customer_id
+        description: 'The ID of the customer.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      customer_id: 2
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      data:
+        custom: []
+        name: data
+        description: 'The JSON:API customer resource object.'
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes:
+        custom: []
+        name: data.attributes
+        description: ''
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.name:
+        custom: []
+        name: data.attributes.name
+        description: 'The full name of the customer. Must not be greater than 255 characters.'
+        required: true
+        example: 'Juan Dela Cruz'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.age:
+        custom: []
+        name: data.attributes.age
+        description: 'The age of the customer. Must be at least 1.'
+        required: true
+        example: 25
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.contactNumber:
+        custom: []
+        name: data.attributes.contactNumber
+        description: 'The contact number of the customer. Must not be greater than 20 characters.'
+        required: true
+        example: '09171234567'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.address:
+        custom: []
+        name: data.attributes.address
+        description: 'The residential address of the customer.'
+        required: true
+        example: 'Puerto Princesa City, Palawan'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships:
+        custom: []
+        name: data.relationships
+        description: ''
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user:
+        custom: []
+        name: data.relationships.user
+        description: ''
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data:
+        custom: []
+        name: data.relationships.user.data
+        description: ''
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data.id:
+        custom: []
+        name: data.relationships.user.data.id
+        description: 'The ID of the user associated with this customer. Only managers with the appropriate permission can change ownership.'
+        required: false
+        example: 1
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      data:
+        attributes:
+          name: 'Juan Dela Cruz'
+          age: 25
+          contactNumber: '09171234567'
+          address: 'Puerto Princesa City, Palawan'
+        relationships:
+          user:
+            data:
+              id: 1
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/v1/customers/{customer_id}'
+    metadata:
+      custom: []
+      groupName: 'PoolDesk API Endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'PATCH /api/v1/customers/{customer}'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      customer_id:
+        custom: []
+        name: customer_id
+        description: 'The ID of the customer.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      customer_id: 2
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      data:
+        custom: []
+        name: data
+        description: 'The JSON:API customer resource object.'
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes:
+        custom: []
+        name: data.attributes
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.name:
+        custom: []
+        name: data.attributes.name
+        description: 'The updated full name of the customer. Must not be greater than 255 characters.'
+        required: false
+        example: 'Juan Dela Cruz'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.age:
+        custom: []
+        name: data.attributes.age
+        description: 'The updated age of the customer. Must be at least 1.'
+        required: false
+        example: 25
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.contactNumber:
+        custom: []
+        name: data.attributes.contactNumber
+        description: 'The updated contact number of the customer. Must not be greater than 20 characters.'
+        required: false
+        example: '09171234567'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.address:
+        custom: []
+        name: data.attributes.address
+        description: 'The updated residential address of the customer.'
+        required: false
+        example: 'Puerto Princesa City, Palawan'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships:
+        custom: []
+        name: data.relationships
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user:
+        custom: []
+        name: data.relationships.user
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data:
+        custom: []
+        name: data.relationships.user.data
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data.id:
+        custom: []
+        name: data.relationships.user.data.id
+        description: 'The ID of the user associated with this customer. Only users with the appropriate permission can change ownership.'
+        required: false
+        example: 1
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      data:
+        attributes:
+          name: 'Juan Dela Cruz'
+          age: 25
+          contactNumber: '09171234567'
+          address: 'Puerto Princesa City, Palawan'
+        relationships:
+          user:
+            data:
+              id: 1
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/customers
+    metadata:
+      custom: []
+      groupName: 'PoolDesk API Endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'GET /api/v1/customers'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"type":"customer","id":"2","attributes":{"name":"Hardy Monahan Updated","age":26,"contactNumber":"09358528177","address":"Puerto Princesa City","createdAt":"2026-11-09T11:34:11.000000Z","updatedAt":"2026-11-21T13:49:18.000000Z"},"includes":[]},{"type":"customer","id":"3","attributes":{"name":"Ms. Lura DuBuque","age":17,"contactNumber":"09300019504","address":"3756 Ricky Expressway Apt. 110\nEast Shakira, AR 84921","createdAt":"2026-11-09T11:34:11.000000Z","updatedAt":"2026-11-19T06:59:13.000000Z"},"includes":[]},{"type":"customer","id":"4","attributes":{"name":"Sven Harris","age":12,"contactNumber":"09182581069","address":"63344 Eleonore Overpass Suite 374\nWest Laurieview, ND 31899-8310","createdAt":"2026-11-09T11:34:11.000000Z","updatedAt":"2026-11-19T06:59:13.000000Z"},"includes":[]},{"type":"customer","id":"5","attributes":{"name":"Monserrate Veum","age":36,"contactNumber":"09039421255","address":"748 Roob Cape Apt. 770\nNellieberg, PA 58981","createdAt":"2026-11-09T11:34:11.000000Z","updatedAt":"2026-11-19T06:59:13.000000Z"},"includes":[]},{"type":"customer","id":"6","attributes":{"name":"Darron Turner","age":27,"contactNumber":"09548642669","address":"448 Bogan Overpass\nEast Lysannemouth, OH 40359-8998","createdAt":"2026-11-09T11:34:11.000000Z","updatedAt":"2026-11-19T06:59:13.000000Z"},"includes":[]},{"type":"customer","id":"7","attributes":{"name":"Dr. Mose Stanton","age":33,"contactNumber":"09146583371","address":"787 Schimmel Drive Suite 131\nAlvenaland, WY 74863-4107","createdAt":"2026-11-09T11:34:11.000000Z","updatedAt":"2026-11-19T06:59:13.000000Z"},"includes":[]},{"type":"customer","id":"8","attributes":{"name":"Grover Lind","age":38,"contactNumber":"09991161745","address":"84865 Maggio Squares Apt. 485\nBulahport, PA 24379","createdAt":"2026-11-09T11:34:11.000000Z","updatedAt":"2026-11-19T06:59:13.000000Z"},"includes":[]},{"type":"customer","id":"9","attributes":{"name":"Madie O''Reilly","age":69,"contactNumber":"09289955852","address":"61937 Zula Circle\nBaumbachview, TX 45278","createdAt":"2026-11-09T11:34:11.000000Z","updatedAt":"2026-11-19T06:59:13.000000Z"},"includes":[]},{"type":"customer","id":"10","attributes":{"name":"Barry Muller","age":64,"contactNumber":"09134682412","address":"97029 Casper Avenue Suite 351\nSoledadton, VA 72602-4047","createdAt":"2026-11-09T11:34:11.000000Z","updatedAt":"2026-11-19T06:59:13.000000Z"},"includes":[]},{"type":"customer","id":"11","attributes":{"name":"Juan Dela Cruz Updated","age":40,"contactNumber":"09123456789","address":"Dasmarinas, Cavite","createdAt":"2026-11-20T08:13:01.000000Z","updatedAt":"2026-11-21T10:59:52.000000Z"},"includes":[]},{"type":"customer","id":"13","attributes":{"name":"Regular User Test Customer","age":41,"contactNumber":"09123456789","address":"Puerto Princesa City","createdAt":"2026-11-21T12:13:13.000000Z","updatedAt":"2026-11-21T12:52:54.000000Z"},"includes":[]},{"type":"customer","id":"15","attributes":{"name":"Unauthorized Test Customer","age":25,"contactNumber":"09123456789","address":"Puerto Princesa City","createdAt":"2026-11-21T13:52:08.000000Z","updatedAt":"2026-11-21T13:52:08.000000Z"},"includes":[]},{"type":"customer","id":"16","attributes":{"name":"Manager Created Test Customer","age":30,"contactNumber":"09123456789","address":"Puerto Princesa City","createdAt":"2026-11-21T13:55:52.000000Z","updatedAt":"2026-11-21T13:55:52.000000Z"},"includes":[]},{"type":"customer","id":"17","attributes":{"name":"User 2 Permission Test","age":27,"contactNumber":"09123456789","address":"Puerto Princesa City","createdAt":"2026-11-22T03:47:09.000000Z","updatedAt":"2026-11-22T03:49:53.000000Z"},"includes":[]},{"type":"customer","id":"18","attributes":{"name":"Lesson 24 Own Customer Test","age":25,"contactNumber":"09123456789","address":"Puerto Princesa City","createdAt":"2026-11-22T04:39:48.000000Z","updatedAt":"2026-11-22T04:39:48.000000Z"},"includes":[]}],"links":{"first":"http:\/\/localhost:8000\/api\/v1\/customers?page=1","last":"http:\/\/localhost:8000\/api\/v1\/customers?page=2","prev":null,"next":"http:\/\/localhost:8000\/api\/v1\/customers?page=2"},"meta":{"current_page":1,"from":1,"last_page":2,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/localhost:8000\/api\/v1\/customers?page=1","label":"1","page":1,"active":true},{"url":"http:\/\/localhost:8000\/api\/v1\/customers?page=2","label":"2","page":2,"active":false},{"url":"http:\/\/localhost:8000\/api\/v1\/customers?page=2","label":"Next &raquo;","page":2,"active":false}],"path":"http:\/\/localhost:8000\/api\/v1\/customers","per_page":15,"to":15,"total":16}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/customers
+    metadata:
+      custom: []
+      groupName: 'PoolDesk API Endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'POST /api/v1/customers'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      data.attributes:
+        custom: []
+        name: data.attributes
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data:
+        custom: []
+        name: data
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.name:
+        custom: []
+        name: data.attributes.name
+        description: 'The full name of the customer. Must not be greater than 255 characters.'
+        required: true
+        example: 'Juan Dela Cruz'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.age:
+        custom: []
+        name: data.attributes.age
+        description: 'The age of the customer. Must be at least 1.'
+        required: true
+        example: 25
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.contactNumber:
+        custom: []
+        name: data.attributes.contactNumber
+        description: 'The contact number of the customer. Must not be greater than 20 characters.'
+        required: true
+        example: '09171234567'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.address:
+        custom: []
+        name: data.attributes.address
+        description: 'The residential address of the customer.'
+        required: true
+        example: 'Puerto Princesa City, Palawan'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data:
+        custom: []
+        name: data.relationships.user.data
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user:
+        custom: []
+        name: data.relationships.user
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships:
+        custom: []
+        name: data.relationships
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data.id:
+        custom: []
+        name: data.relationships.user.data.id
+        description: 'The ID of the user who owns this customer. Regular users must use their own ID. Managers with the appropriate permission may select another owner. Must match an existing stored value.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      data:
+        attributes:
+          name: 'Juan Dela Cruz'
+          age: 25
+          contactNumber: '09171234567'
+          address: 'Puerto Princesa City, Palawan'
+        relationships:
+          user:
+            data:
+              id: 1
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/customers/{customer_id}'
+    metadata:
+      custom: []
+      groupName: 'PoolDesk API Endpoints'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'GET /api/v1/customers/{customer}'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      customer_id:
+        custom: []
+        name: customer_id
+        description: 'The ID of the customer.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      customer_id: 2
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"type":"customer","id":"2","attributes":{"name":"Hardy Monahan Updated","age":26,"contactNumber":"09358528177","address":"Puerto Princesa City","createdAt":"2026-11-09T11:34:11.000000Z","updatedAt":"2026-11-21T13:49:18.000000Z"},"includes":[]}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

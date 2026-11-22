@@ -1,0 +1,740 @@
+name: 'User Customer Management'
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/users/{user_id}/customers'
+    metadata:
+      custom: []
+      groupName: 'User Customer Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Retrieve customers belonging to a specific user.'
+      description: 'Supports customer filtering and pagination.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_JWT_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      user_id:
+        custom: []
+        name: user_id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      user:
+        custom: []
+        name: user
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      user_id: 1
+      user: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"errors":[{"status":401,"message":"Unauthenticated.","source":""}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/users/{user_id}/customers'
+    metadata:
+      custom: []
+      groupName: 'User Customer Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create a customer under a specific user.'
+      description: 'Regular users can only create customers under their own account.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_JWT_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      user_id:
+        custom: []
+        name: user_id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      user:
+        custom: []
+        name: user
+        description: 'The ID of the user who will own the customer.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      user_id: 1
+      user: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      data.attributes:
+        custom: []
+        name: data.attributes
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data:
+        custom: []
+        name: data
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.name:
+        custom: []
+        name: data.attributes.name
+        description: 'The full name of the customer. Must not be greater than 255 characters.'
+        required: true
+        example: 'Juan Dela Cruz'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.age:
+        custom: []
+        name: data.attributes.age
+        description: 'The age of the customer. Must be at least 1.'
+        required: true
+        example: 25
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.contactNumber:
+        custom: []
+        name: data.attributes.contactNumber
+        description: 'The contact number of the customer. Must not be greater than 20 characters.'
+        required: true
+        example: '09171234567'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.address:
+        custom: []
+        name: data.attributes.address
+        description: 'The residential address of the customer.'
+        required: true
+        example: 'Puerto Princesa City, Palawan'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data:
+        custom: []
+        name: data.relationships.user.data
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user:
+        custom: []
+        name: data.relationships.user
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships:
+        custom: []
+        name: data.relationships
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data.id:
+        custom: []
+        name: data.relationships.user.data.id
+        description: 'The ID of the user who owns this customer. Regular users must use their own ID. Managers with the appropriate permission may select another owner. Must match an existing stored value.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      data:
+        attributes:
+          name: 'Juan Dela Cruz'
+          age: 25
+          contactNumber: '09171234567'
+          address: 'Puerto Princesa City, Palawan'
+        relationships:
+          user:
+            data:
+              id: 1
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/users/{user_id}/customers/{id}'
+    metadata:
+      custom: []
+      groupName: 'User Customer Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Partially update a customer's information under a specific user."
+      description: 'Updates only the submitted customer fields.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_JWT_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      user_id:
+        custom: []
+        name: user_id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the customer.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      user:
+        custom: []
+        name: user
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      customer:
+        custom: []
+        name: customer
+        description: 'The ID of the customer.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      user_id: 1
+      id: 2
+      user: 1
+      customer: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      data:
+        custom: []
+        name: data
+        description: 'The JSON:API customer resource object.'
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes:
+        custom: []
+        name: data.attributes
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.name:
+        custom: []
+        name: data.attributes.name
+        description: 'The updated full name of the customer. Must not be greater than 255 characters.'
+        required: false
+        example: 'Juan Dela Cruz'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.age:
+        custom: []
+        name: data.attributes.age
+        description: 'The updated age of the customer. Must be at least 1.'
+        required: false
+        example: 25
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.contactNumber:
+        custom: []
+        name: data.attributes.contactNumber
+        description: 'The updated contact number of the customer. Must not be greater than 20 characters.'
+        required: false
+        example: '09171234567'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.address:
+        custom: []
+        name: data.attributes.address
+        description: 'The updated residential address of the customer.'
+        required: false
+        example: 'Puerto Princesa City, Palawan'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships:
+        custom: []
+        name: data.relationships
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user:
+        custom: []
+        name: data.relationships.user
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data:
+        custom: []
+        name: data.relationships.user.data
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data.id:
+        custom: []
+        name: data.relationships.user.data.id
+        description: 'The ID of the user associated with this customer. Only users with the appropriate permission can change ownership.'
+        required: false
+        example: 1
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      data:
+        attributes:
+          name: 'Juan Dela Cruz'
+          age: 25
+          contactNumber: '09171234567'
+          address: 'Puerto Princesa City, Palawan'
+        relationships:
+          user:
+            data:
+              id: 1
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/users/{user_id}/customers/{id}'
+    metadata:
+      custom: []
+      groupName: 'User Customer Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Delete a customer's record under a specific user."
+      description: 'Permanently removes the specified customer.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_JWT_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      user_id:
+        custom: []
+        name: user_id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the customer.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      user:
+        custom: []
+        name: user
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      customer:
+        custom: []
+        name: customer
+        description: 'The ID of the customer.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      user_id: 1
+      id: 2
+      user: 1
+      customer: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/users/{user_id}/customers/{customer_id}'
+    metadata:
+      custom: []
+      groupName: 'User Customer Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Replace a customer's information under a specific user."
+      description: 'Replaces the submitted customer information.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_JWT_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      user_id:
+        custom: []
+        name: user_id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      customer_id:
+        custom: []
+        name: customer_id
+        description: 'The ID of the customer.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      user:
+        custom: []
+        name: user
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      customer:
+        custom: []
+        name: customer
+        description: 'The ID of the customer.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      user_id: 1
+      customer_id: 2
+      user: 1
+      customer: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      data:
+        custom: []
+        name: data
+        description: 'The JSON:API customer resource object.'
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes:
+        custom: []
+        name: data.attributes
+        description: ''
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.name:
+        custom: []
+        name: data.attributes.name
+        description: 'The full name of the customer. Must not be greater than 255 characters.'
+        required: true
+        example: 'Juan Dela Cruz'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.age:
+        custom: []
+        name: data.attributes.age
+        description: 'The age of the customer. Must be at least 1.'
+        required: true
+        example: 25
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.contactNumber:
+        custom: []
+        name: data.attributes.contactNumber
+        description: 'The contact number of the customer. Must not be greater than 20 characters.'
+        required: true
+        example: '09171234567'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.address:
+        custom: []
+        name: data.attributes.address
+        description: 'The residential address of the customer.'
+        required: true
+        example: 'Puerto Princesa City, Palawan'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships:
+        custom: []
+        name: data.relationships
+        description: ''
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user:
+        custom: []
+        name: data.relationships.user
+        description: ''
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data:
+        custom: []
+        name: data.relationships.user.data
+        description: ''
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.relationships.user.data.id:
+        custom: []
+        name: data.relationships.user.data.id
+        description: 'The ID of the user associated with this customer. Only managers with the appropriate permission can change ownership.'
+        required: false
+        example: 1
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      data:
+        attributes:
+          name: 'Juan Dela Cruz'
+          age: 25
+          contactNumber: '09171234567'
+          address: 'Puerto Princesa City, Palawan'
+        relationships:
+          user:
+            data:
+              id: 1
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

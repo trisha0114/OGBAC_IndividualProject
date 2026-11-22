@@ -11,6 +11,35 @@ class StoreUserRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Describe the request body parameters for Scribe.
+     */
+    public function bodyParameters(): array
+    {
+        return [
+            'name' => [
+                'description' => 'The full name of the user.',
+                'example' => 'Juan Dela Cruz',
+            ],
+            'email' => [
+                'description' => 'The user email address. Must be unique.',
+                'example' => 'juan@example.com',
+            ],
+            'password' => [
+                'description' => 'The user password. Minimum of 8 characters.',
+                'example' => 'Password123',
+            ],
+            'password_confirmation' => [
+                'description' => 'Must match the password.',
+                'example' => 'Password123',
+            ],
+            'is_manager' => [
+                'description' => 'Indicates whether the user has manager privileges.',
+                'example' => true,
+            ],
+        ];
+    }
+
     public function rules(): array
     {
         return [

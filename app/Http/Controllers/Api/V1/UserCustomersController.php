@@ -13,6 +13,17 @@ use App\Permissions\V1\Abilities;
 
 class UserCustomersController extends APIController
 {
+    /**
+     * Retrieve customers belonging to a specific user.
+     *
+     * Supports customer filtering and pagination.
+     *
+     * @group User Customer Management
+     *
+     * @authenticated
+     *
+     * @urlParam user integer required The ID of the user. Example: 1
+     */
     public function index(User $user, CustomerFilter $filters)
     {
         return CustomerResource::collection(
@@ -22,6 +33,17 @@ class UserCustomersController extends APIController
         );
     }
 
+    /**
+     * Create a customer under a specific user.
+     *
+     * Regular users can only create customers under their own account.
+     *
+     * @group User Customer Management
+     *
+     * @authenticated
+     *
+     * @urlParam user integer required The ID of the user who will own the customer. Example: 1
+     */
     public function store(StoreCustomerRequest $request, User $user)
     {
         $authenticatedUser = $request->user();
@@ -53,6 +75,18 @@ class UserCustomersController extends APIController
         return new CustomerResource($customer);
     }
 
+    /**
+     * Replace a customer's information under a specific user.
+     *
+     * Replaces the submitted customer information.
+     *
+     * @group User Customer Management
+     *
+     * @authenticated
+     *
+     * @urlParam user integer required The ID of the user. Example: 1
+     * @urlParam customer integer required The ID of the customer. Example: 1
+     */
     public function replace(
         ReplaceCustomerRequest $request,
         User $user,
@@ -69,6 +103,18 @@ class UserCustomersController extends APIController
         return new CustomerResource($customer);
     }
 
+    /**
+     * Partially update a customer's information under a specific user.
+     *
+     * Updates only the submitted customer fields.
+     *
+     * @group User Customer Management
+     *
+     * @authenticated
+     *
+     * @urlParam user integer required The ID of the user. Example: 1
+     * @urlParam customer integer required The ID of the customer. Example: 1
+     */
     public function update(
         UpdateCustomerRequest $request,
         User $user,
@@ -85,6 +131,18 @@ class UserCustomersController extends APIController
         return new CustomerResource($customer);
     }
 
+    /**
+     * Delete a customer's record under a specific user.
+     *
+     * Permanently removes the specified customer.
+     *
+     * @group User Customer Management
+     *
+     * @authenticated
+     *
+     * @urlParam user integer required The ID of the user. Example: 1
+     * @urlParam customer integer required The ID of the customer. Example: 1
+     */
     public function destroy(User $user, Customer $customer)
     {
         if (!$this->isAble('delete', $customer)) {

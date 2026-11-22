@@ -9,8 +9,15 @@ use App\Models\User;
 class StaffController extends APIController
 {
     /**
-     * GET /api/v1/staff
-     * Supports sorting and optional customer relationships.
+     * Retrieve a paginated list of staff members.
+     *
+     * Supports filtering, sorting, and optional customer relationships.
+     *
+     * @group Staff Management
+     *
+     * @authenticated
+     *
+     * @queryParam include string Include related resources. Example: customers
      */
     public function index(UserFilter $filters)
     {
@@ -26,7 +33,17 @@ class StaffController extends APIController
     }
 
     /**
-     * GET /api/v1/staff/{user}
+     * Retrieve a specific staff member.
+     *
+     * Returns staff information and optionally associated customers.
+     *
+     * @group Staff Management
+     *
+     * @authenticated
+     *
+     * @urlParam user integer required The ID of the staff member. Example: 1
+     *
+     * @queryParam include string Include related resources. Example: customers
      */
     public function show(User $user)
     {

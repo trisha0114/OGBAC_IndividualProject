@@ -13,6 +13,16 @@ class AuthController extends Controller
 {
     use ApiResponses;
 
+    /**
+     * Register a new user account.
+     *
+     * Creates a new user and automatically generates
+     * a JWT access token.
+     *
+     * @group Authentication
+     *
+     * @unauthenticated
+     */
     public function register(RegisterRequest $request): JsonResponse
     {
         $user = User::create($request->validated());
@@ -30,6 +40,15 @@ class AuthController extends Controller
         );
     }
 
+    /**
+     * Authenticate a user and generate an access token.
+     *
+     * Validates the user's email and password.
+     *
+     * @group Authentication
+     *
+     * @unauthenticated
+     */
     public function login(LoginRequest $request): JsonResponse
     {
         $credentials = $request->validated();
@@ -48,6 +67,16 @@ class AuthController extends Controller
         );
     }
 
+    /**
+     * Retrieve the currently authenticated user.
+     *
+     * Returns the user information associated with
+     * the supplied JWT access token.
+     *
+     * @group Authentication
+     *
+     * @authenticated
+     */
     public function me(): JsonResponse
     {
         return $this->success(
@@ -56,6 +85,15 @@ class AuthController extends Controller
         );
     }
 
+    /**
+     * Refresh the current JWT access token.
+     *
+     * Generates a new access token for the authenticated user.
+     *
+     * @group Authentication
+     *
+     * @authenticated
+     */
     public function refresh(): JsonResponse
     {
         $token = auth('api')->refresh();
@@ -69,6 +107,15 @@ class AuthController extends Controller
         );
     }
 
+    /**
+     * Log out the currently authenticated user.
+     *
+     * Invalidates the current JWT access token.
+     *
+     * @group Authentication
+     *
+     * @authenticated
+     */
     public function logout(): JsonResponse
     {
         auth('api')->logout();

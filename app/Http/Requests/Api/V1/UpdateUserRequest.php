@@ -12,6 +12,35 @@ class UpdateUserRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Describe the request body parameters for Scribe.
+     */
+    public function bodyParameters(): array
+    {
+        return [
+            'name' => [
+                'description' => 'The updated full name of the user.',
+                'example' => 'Juan Dela Cruz',
+            ],
+            'email' => [
+                'description' => 'The updated email address. Must be unique.',
+                'example' => 'juan@example.com',
+            ],
+            'password' => [
+                'description' => 'The new password. Minimum of 8 characters.',
+                'example' => 'NewPassword123',
+            ],
+            'password_confirmation' => [
+                'description' => 'Must match the new password.',
+                'example' => 'NewPassword123',
+            ],
+            'is_manager' => [
+                'description' => 'Indicates whether the user has manager privileges.',
+                'example' => true,
+            ],
+        ];
+    }
+
     public function rules(): array
     {
         $user = $this->route('user');

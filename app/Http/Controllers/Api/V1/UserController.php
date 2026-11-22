@@ -11,7 +11,13 @@ use App\Models\User;
 class UserController extends APIController
 {
     /**
-     * Display a listing of users.
+     * Retrieve a paginated list of users.
+     *
+     * Returns the available users in the system.
+     *
+     * @group User Management
+     *
+     * @authenticated
      */
     public function index()
     {
@@ -27,7 +33,15 @@ class UserController extends APIController
     }
 
     /**
-     * Display the specified user.
+     * Retrieve a specific user.
+     *
+     * Returns the details of the selected user.
+     *
+     * @group User Management
+     *
+     * @authenticated
+     *
+     * @urlParam user integer required The ID of the user. Example: 1
      */
     public function show(User $user)
     {
@@ -41,7 +55,13 @@ class UserController extends APIController
     }
 
     /**
-     * Store a newly created user.
+     * Create a new user.
+     *
+     * Stores a new user account in the system.
+     *
+     * @group User Management
+     *
+     * @authenticated
      */
     public function store(StoreUserRequest $request)
     {
@@ -59,7 +79,15 @@ class UserController extends APIController
     }
 
     /**
-     * Replace the specified user.
+     * Replace an existing user's information.
+     *
+     * Replaces the specified user's submitted information.
+     *
+     * @group User Management
+     *
+     * @authenticated
+     *
+     * @urlParam user integer required The ID of the user. Example: 1
      */
     public function replace(
         ReplaceUserRequest $request,
@@ -79,7 +107,15 @@ class UserController extends APIController
     }
 
     /**
-     * Update the specified user.
+     * Partially update an existing user's information.
+     *
+     * Updates only the submitted user fields.
+     *
+     * @group User Management
+     *
+     * @authenticated
+     *
+     * @urlParam user integer required The ID of the user. Example: 1
      */
     public function update(
         UpdateUserRequest $request,
@@ -99,7 +135,15 @@ class UserController extends APIController
     }
 
     /**
-     * Remove the specified user.
+     * Delete a user.
+     *
+     * Permanently removes the specified user account.
+     *
+     * @group User Management
+     *
+     * @authenticated
+     *
+     * @urlParam user integer required The ID of the user. Example: 1
      */
     public function destroy(User $user)
     {
