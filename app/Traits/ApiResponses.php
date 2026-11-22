@@ -6,14 +6,20 @@ use Illuminate\Http\JsonResponse;
 
 trait ApiResponses
 {
-    protected function ok(string $message, $data = null): JsonResponse
+    /**
+     * Shortcut for a 200 OK response.
+     */
+    protected function ok(string $message, mixed $data = null): JsonResponse
     {
         return $this->success($message, $data);
     }
 
+    /**
+     * Generic success response.
+     */
     protected function success(
         string $message,
-        $data = null,
+        mixed $data = null,
         int $statusCode = 200
     ): JsonResponse {
         return response()->json([
@@ -23,14 +29,39 @@ trait ApiResponses
         ], $statusCode);
     }
 
+    /**
+     * Standard error response.
+     *
+     * Accepts either:
+     * - A plain message string
+     * - An array of error objects
+     */
     protected function error(
-        string $message,
-        int $statusCode = 400
+        string|array $errors = [],
+        ?int $statusCode = null
     ): JsonResponse {
+
+        // A single error message
+        if (is_string($errors)) {
+            $statusCode ??= 400;
+
+            return response()->json([
+                'message' => $errors,
+                'status' => $statusCode,
+            ], $statusCode);
+        }
+
+        // A list of errors
+        $status = $statusCode ?? ($errors[0]['status'] ?? 500);
+
+        // Guard against invalid HTTP status codes
+        if ($status < 100 || $status > 599) {
+            $status = 500;
+        }
+
         return response()->json([
-            'message' => $message,
-            'status' => $statusCode,
-        ], $statusCode);
+            'errors' => $errors,
+        ], $status);
     }
 
     /**
@@ -39,6 +70,12 @@ trait ApiResponses
      */
     protected function notAuthorized(string $message): JsonResponse
     {
-        return $this->error($message, 403);
+        return $this->error([
+            [
+                'status' => 403,
+                'message' => $message,
+                'source' => '',
+            ],
+        ]);
     }
 }
