@@ -16,6 +16,7 @@ class UserResource extends JsonResource
             'attributes' => [
                 'name' => $this->name,
                 'email' => $this->email,
+                'isManager' => (bool) $this->is_manager,
             ],
 
             // Customers appear only when requested

@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\CustomerController;
 use App\Http\Controllers\Api\V1\StaffController;
 use App\Http\Controllers\Api\V1\UserCustomersController;
+use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Public authentication routes
@@ -17,6 +18,16 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/user', [AuthController::class, 'me']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // User management routes
+    Route::apiResource('users', UserController::class)
+        ->only(['index', 'show', 'store', 'update', 'destroy']);
+
+    // Replace user using PUT
+    Route::put(
+        '/users/{user}',
+        [UserController::class, 'replace']
+    );
 
     // Customer routes
     Route::delete('/customers/{customer}', [CustomerController::class, 'destroy']);
