@@ -44,17 +44,18 @@ class UpdateCustomerRequest extends BaseCustomerRequest
             'data.relationships.user' => ['sometimes', 'array'],
             'data.relationships.user.data' => ['sometimes', 'array'],
 
+            // Deny by default: nobody may change the customer owner.
             'data.relationships.user.data.id' => [
-                'sometimes',
-                'integer',
-                'exists:users,id',
+                'prohibited',
             ],
         ];
 
-        // Regular users cannot change the customer owner.
-        if ($this->user()->tokenCan(Abilities::UpdateOwnCustomer)) {
+        // Only users with broad permission may change the owner.
+        if ($this->user()->tokenCan(Abilities::UpdateCustomer)) {
             $rules['data.relationships.user.data.id'] = [
-                'prohibited',
+                'sometimes',
+                'integer',
+                'exists:users,id',
             ];
         }
 
